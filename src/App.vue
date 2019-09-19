@@ -1,20 +1,32 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <virtualList :data="list"/>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator'
-import HelloWorld from './components/HelloWorld.vue'
+import { Component, Provide, Vue } from 'vue-property-decorator'
+import virtualList from './components/virtual-list.vue'
 
 @Component({
   components: {
-    HelloWorld
+    virtualList
   }
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  list: any = []
+
+  created () {
+    const tmp = []
+    for (let index = 0; index < 10000; index++) {
+      tmp.push({
+        id: index,
+        name: 'name' + index
+      })
+    }
+    this.list = tmp
+  }
+}
 </script>
 
 <style>
