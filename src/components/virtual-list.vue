@@ -1,14 +1,13 @@
 <template>
-  <div class="my-virtual-list">
+  <div class="yz-virtual-list">
     <div
-      class="item"
       v-for="(item, index) in resultList"
       :id="getDivId(index)"
       :key="item.id"
-      content_div
-      :style="'top:' + 150 * (index + start) + 'px'"
+      :class="itemClass"
+      :style="'top:' + unitHeight * (index + start) + 'px'"
     >
-      {{ item.name }}
+      <slot :row="item" />
     </div>
   </div>
 </template>
@@ -18,8 +17,10 @@ import { Component, Prop, Vue } from 'vue-property-decorator'
 
 @Component
 export default class virtualList extends Vue {
-  @Prop() data: any;
+  @Prop() data: any
+  @Prop() itemClass: String|undefined
 
+  unitHeight = 0;
   page = 15
   start = 0
   end = 15
@@ -50,6 +51,11 @@ export default class virtualList extends Vue {
 
   mounted () {
     const self = this
+
+    // 获取单个元素的高度
+    this.$el.firstElementChild && (this.unitHeight = this.$el.firstElementChild.clientHeight)
+
+    // 头部元素和尾部元素的可见状态变化的处理逻辑
     this.observer = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry, index) => {
@@ -87,17 +93,13 @@ export default class virtualList extends Vue {
 </script>
 
 <style lang="less">
-.my-virtual-list {
+.yz-virtual-list {
   height: 400px;
   overflow: auto;
   position: relative;
 
-  .item{
+  > div {
     position: absolute;
-    width: 300px;
-    height: 150px;
-    border: 1px solid red;
-    margin: 10px auto;
   }
 }
 </style>

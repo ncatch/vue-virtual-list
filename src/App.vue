@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <virtualList :data="list"/>
+    <virtualList :data="list">
+      <template slot-scope="scope">
+        <div class="list_item">{{ scope.row.name }}</div>
+      </template>
+    </virtualList>
   </div>
 </template>
 
@@ -37,5 +41,13 @@ export default class App extends Vue {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.list_item{
+  height: 150px;
+  width: 300px;
+  border: 1px solid gray;
+  margin: 10px 0px;
+  border-radius: 10px;
 }
 </style>
