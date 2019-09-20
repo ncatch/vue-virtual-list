@@ -2,9 +2,7 @@
 
 <virtualList :data="list">
   <template slot-scope="scope">
-    <div class="list_item">{{ scope.row.name }}</div>
-  </template>
-</virtualList>
+    <div class="list_item">{{ scope.row.name }}
 
 props:
 
