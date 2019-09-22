@@ -1,29 +1,15 @@
-# test
+基于此篇文章编写 https://juejin.im/post/5d7f80796fb9a06b24434d4e?tdsourcetag=s_pcqq_aiomsg
 
-## Project setup
-```
-npm install
-```
+    <virtualList :data="list">
+        <template slot-scope="scope">
+            <div class="list_item">{{ scope.row.name }}</div>
+        </template>
+    </virtualList>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+props:
 
-### Compiles and minifies for production
-```
-npm run build
-```
+data: 数据
 
-### Run your tests
-```
-npm run test
-```
+itemClass: 列表项的class
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+存在问题 滚动条超过一定长度时 直接拖动滚动条 列表无法正常渲染
