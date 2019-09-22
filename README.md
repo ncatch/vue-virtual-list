@@ -9,3 +9,5 @@ props:
 
 
 存在问题 滚动条超过一定长度时  直接拖动滚动条 列表无法正常渲染
+
+![demo](https://github.com/ncatch/vue-virtual-list/blob/master/src/assets/demo.gif)
